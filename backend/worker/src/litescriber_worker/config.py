@@ -18,7 +18,7 @@ env = Env()
 
 # optionally load .env file
 if env.bool("LITESCRIBER_READ_DOT_ENV_FILE", default=False):
-    DOT_ENV_FILE_PATH: str = env.str("LITESCRIBER_DOT_ENV_FILE_PATH", default=BACKEND_DIR / ".env")
+    DOT_ENV_FILE_PATH: str = env.str("LITESCRIBER_DOT_ENV_FILE_PATH", default=WORKER_DIR / ".env")
     env.read_env(DOT_ENV_FILE_PATH)
 
 # Logging settings
