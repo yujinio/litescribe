@@ -6,29 +6,14 @@ from environs import Env
 from faster_whisper.utils import available_models
 from marshmallow import validate
 
+from litescriber_shared.config_utils import get_secret
+
 APP_DIR = Path(__file__).resolve().parent
 SRC_DIR = APP_DIR.parent
 WORKER_DIR = SRC_DIR.parent
 BACKEND_DIR = WORKER_DIR.parent
 PROJECT_DIR = BACKEND_DIR.parent
 env = Env()
-
-
-def get_secret(name: str, default: object = None) -> str:
-    if value := env.str(name, None):
-        logging.warning(f"{name} is set in the environment. Consider using a file secret.")
-        return value
-
-    if value := env.str(f"{name}_FILE", None):
-        fp = Path(value)
-        if not fp.is_file():
-            raise FileNotFoundError(f"File not found: {fp}.")
-        return fp.read_text()
-
-    if default:
-        return default
-
-    raise ValueError(f"Secret {name} not found in environment or file.")
 
 
 # optionally load .env file
@@ -55,7 +40,7 @@ RABBITMQ_AVAILABLE_QUEUES: list[str] = env.list(
     "LITESCRIBER_RABBITMQ_AVAILABLE_QUEUES", default=["tiny", "small", "base", "medium", "large"], subcast=str
 )
 RABBITMQ_USER: str | None = env.str("LITESCRIBER_RABBITMQ_USER", default=None)
-RABBITMQ_PASSWORD: str | None = get_secret("LITESCRIBER_RABBITMQ_PASSWORD", default=None)
+RABBITMQ_PASSWORD: str | None = get_secret(env, "LITESCRIBER_RABBITMQ_PASSWORD", default=None)
 
 # Whisper configuration
 # ---------------------------------------------------------------------------------------------------------------------
@@ -84,4 +69,4 @@ WHISPER_AUDIO_MAX_DURATION_LIMIT_SECONDS: int = env.int(
 # Gateway configuration
 # ---------------------------------------------------------------------------------------------------------------------
 GATEWAY_API_BASE_URL: str | None = env.str("LITESCRIBER_GATEWAY_API_BASE_URL", default=None)
-GATEWAY_API_TOKEN: str | None = get_secret("LITESCRIBER_GATEWAY_API_TOKEN", default=None)
+GATEWAY_API_TOKEN: str | None = get_secret(env, "LITESCRIBER_GATEWAY_API_TOKEN", default=None)
