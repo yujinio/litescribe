@@ -1,0 +1,77 @@
+default_language_version:
+  python: "3.12"
+default_stages: [pre-commit]
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: detect-private-key
+      - id: check-ast
+      - id: mixed-line-ending
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.4.0
+    hooks:
+      - id: pyupgrade
+        files: ^backend/gateway/src/litescriber_gateway/
+      - id: pyupgrade
+        files: ^backend/worker/src/litescriber_worker/
+      - id: pyupgrade
+        files: ^backend/shared/src/litescriber_shared/
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "v3.0.0-alpha.9-for-vscode"
+    hooks:
+      - id: prettier
+        files: ^backend/gateway/src/litescriber_gateway/
+        args: ["--tab-width", "2"]
+      - id: prettier
+        files: ^backend/worker/src/litescriber_worker/
+        args: ["--tab-width", "2"]
+      - id: prettier
+        files: ^backend/shared/src/litescriber_shared/
+        args: ["--tab-width", "2"]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.4
+    hooks:
+      - id: ruff
+        args: [ --config=backend/worker/pyproject.toml, --fix ]
+        files: ^backend/worker/src/litescriber_worker/
+      - id: ruff
+        args: [ --config=backend/gateway/pyproject.toml, --fix ]
+        files: ^backend/gateway/src/litescriber_gateway/
+      - id: ruff
+        args: [ --config=backend/shared/pyproject.toml, --fix ]
+        files: ^backend/shared/src/litescriber_shared/
+      - id: ruff-format
+        args: [ --config=backend/worker/pyproject.toml ]
+        files: ^backend/worker/src/litescriber_worker/
+      - id: ruff-format
+        args: [ --config=backend/gateway/pyproject.toml ]
+        files: ^backend/gateway/src/litescriber_gateway/
+      - id: ruff-format
+        args: [ --config=backend/shared/pyproject.toml ]
+        files: ^backend/shared/src/litescriber_shared/
+
+  - repo: https://github.com/pycqa/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        files: ^backend/worker/src/litescriber_worker/
+        exclude: "test_*"
+      - id: bandit
+        files: ^backend/gateway/src/litescriber_gateway/
+        exclude: "test_*"
+      - id: bandit
+        files: ^backend/shared/src/litescriber_shared/
+        exclude: "test_*"

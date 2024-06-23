@@ -1,0 +1,67 @@
+[tool.poetry]
+name = "litescriber_shared"
+version = "0.1.0"
+description = "A shared codebase for a LiteScriber transcription service."
+authors = ["yujinio <root@yujin.io>"]
+license = "GPL-3.0-only"
+readme = "README.md"
+repository = "https://github.com/yujinio/litescriber"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+msgpack = "^1.0.8"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.10"
+mypy = "^1.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+# ==== pytest ====
+[tool.pytest.ini_options]
+minversion = "6.0"
+python_files = [
+  "tests.py",
+  "test_*.py",
+  "*_test.py",
+]
+
+# ==== ruff ====
+[tool.ruff]
+fix = true
+include = ['.pyi']
+line-length = 119
+show-fixes = true
+target-version = "py312"
+
+[tool.ruff.isort]
+known-first-party = ["litescriber_shared"]
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 119
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+
+# ==== mypy ====
+[tool.mypy]
+check_untyped_defs = true
+disallow_any_generics = false
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+ignore_missing_imports = false
+implicit_reexport = false
+python_version = "3.12"
+show_error_codes = true
+strict = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
