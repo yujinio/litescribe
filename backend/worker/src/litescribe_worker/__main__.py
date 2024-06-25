@@ -3,8 +3,8 @@ import logging
 import click
 from ctranslate2.specs.model_spec import ACCEPTED_MODEL_TYPES as ctranslate2_supported_compute_types
 
-from litescriber_worker import config, consumer, gateway_client, transcriber
-from litescriber_worker.rabbitmq_helper import get_consumer_count
+from litescribe_worker import config, consumer, gateway_client, transcriber
+from litescribe_worker.rabbitmq_helper import get_consumer_count
 
 
 @click.command()
@@ -125,7 +125,7 @@ def run(
         queue_name=queue,
     )
 
-    consumer_id = f"litescriber-{queue}-{consumer_count + 1}"
+    consumer_id = f"litescribe-{queue}-{consumer_count + 1}"
 
     click.echo(f"Consumer ID: {consumer_id}")
 

@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "litescriber_shared"
+name = "litescribe_shared"
 version = "0.1.0"
-description = "A shared codebase for a LiteScriber transcription service."
+description = "A shared codebase for a litescribe transcription service."
 authors = ["yujinio <root@yujin.io>"]
 license = "GPL-3.0-only"
 readme = "README.md"
-repository = "https://github.com/yujinio/litescriber"
+repository = "https://github.com/yujinio/litescribe"
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -39,7 +39,7 @@ show-fixes = true
 target-version = "py312"
 
 [tool.ruff.isort]
-known-first-party = ["litescriber_shared"]
+known-first-party = ["litescribe_shared"]
 
 [tool.ruff.format]
 docstring-code-format = true

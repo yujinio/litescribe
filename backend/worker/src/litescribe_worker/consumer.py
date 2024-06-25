@@ -5,10 +5,10 @@ import pika
 from pika.adapters.blocking_connection import BlockingChannel
 from pika.spec import Basic, BasicProperties
 
-from litescriber_shared.dto import TranscriptionRequest
-from litescriber_shared.serialization import deserialize_transcription_request
-from litescriber_worker.gateway_client import GatewayClient
-from litescriber_worker.transcriber import Transcriber
+from litescribe_shared.dto import TranscriptionRequest
+from litescribe_shared.serialization import deserialize_transcription_request
+from litescribe_worker.gateway_client import GatewayClient
+from litescribe_worker.transcriber import Transcriber
 
 
 class BaseConsumer(ABC):

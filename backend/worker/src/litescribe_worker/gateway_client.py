@@ -1,7 +1,7 @@
 import httpx
 
-from litescriber_shared.dto import TranscripionResult
-from litescriber_shared.serialization import serialize_transcription_request
+from litescribe_shared.dto import TranscripionResult
+from litescribe_shared.serialization import serialize_transcription_request
 
 
 class GatewayClient:

@@ -2,7 +2,7 @@ from dataclasses import asdict
 
 import msgpack
 
-from litescriber_shared.dto import TranscripionResult, TranscriptionRequest
+from litescribe_shared.dto import TranscripionResult, TranscriptionRequest
 
 
 def serialize_transcription_request(request: TranscriptionRequest) -> bytes:
